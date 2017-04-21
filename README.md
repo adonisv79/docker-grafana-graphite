@@ -44,7 +44,7 @@ ports to whatever you want by changing left side number in the `--publish` param
 ### Using the Docker Index (Windows) ###
 
 For windows, you can just start the container using the default docker run command.
-Note: replace ports like '4400' with the port where grafana will be accesible to
+Note: replace ports like '80' with the port where grafana will be accesible to. In the example below we replaced the grafana port 80 with port '4400'
 ```bash
 c:\docker run -d -p 4400:80 -p 81:81 -p 2003:2003 -p 8125:8125/udp -p 8126:8126 --name grafana4 adonisv79/grafana4
 ```
@@ -52,21 +52,30 @@ c:\docker run -d -p 4400:80 -p 81:81 -p 2003:2003 -p 8125:8125/udp -p 8126:8126 
 
 ### Building the image yourself ###
 
-The Dockerfile and supporting configuration files are available in our [Github repository](https://github.com/kamon-io/docker-grafana-graphite).
+The Dockerfile and supporting configuration files are available in our [Github repository](https://github.com/adonisv79/docker-grafana-graphite).
 This comes specially handy if you want to change any of the StatsD, Graphite or Grafana settings, or simply if you want
-to know how tha image was built. The repo also has `build` and `start` scripts to make your workflow more pleasant.
+to know how the image was built. The repo also has `build` and `start` scripts to make your workflow more pleasant.
 
 
 ### Using the Dashboards ###
 
-Once your container is running all you need to do is:
-
-- open your browser pointing to http://localhost:80 (or another port if you changed it)
+####Grafana
+- open your browser pointing to http://localhost:80 (or another port if you changed it like '4400')
   - Docker with VirtualBox on macOS: use `docker-machine ip` instead of `localhost`
 - login with the default username (admin) and password (admin)
 - open existing dashboard (or create a new one) and select 'Local Graphite' datasource
 - play with the dashboard at your wish...
 
+####Graphite
+- open your browser pointing to http://localhost:81 (or another port if you also changed it)
+  - Docker with VirtualBox on macOS: use `docker-machine ip` instead of `localhost`
+- login with the default username (admin) and password (admin)
+- play with the dashboard at your wish...
+
+### Data Population ###
+This image allows your apps to send time-series data using [edgy's StatsD](https://codeascraft.com/2011/02/15/measure-anything-measure-everything/).
+- For Node developers we recommend using [node-statsd](https://github.com/sivy/node-statsd)
+- The StatsD UDP port is set to 8125.
 
 ### Persisted Data ###
 
