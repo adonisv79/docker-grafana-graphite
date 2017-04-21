@@ -6,9 +6,9 @@ dashboard that gives you the basic metrics currently collected by Kamon for both
 for using this image:
 
 
-### Using the Docker Index ###
+### Using the Docker Index (Linux/Unix) ###
 
-This image is published under [Kamon's repository on the Docker Hub](https://hub.docker.com/u/kamon/) and all you
+This image is forked from [Kamon's repository on the Docker Hub](https://hub.docker.com/u/kamon/) and all you
 need as a prerequisite is having `docker`, `docker-compose`, and `make` installed on your machine. The container exposes the following ports:
 
 - `80`: the Grafana web interface.
@@ -40,6 +40,14 @@ $ make tail
 
 If you already have services running on your host that are using any of these ports, you may wish to map the container
 ports to whatever you want by changing left side number in the `--publish` parameters. You can omit ports you do not plan to use. Find more details about mapping ports in the Docker documentation on [Binding container ports to the host](https://docs.docker.com/engine/userguide/networking/default_network/binding/) and [Legacy container links](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/).
+
+### Using the Docker Index (Windows) ###
+
+For windows, you can just start the container using the default docker run command.
+Note: replace ports like '4400' with the port where grafana will be accesible to
+```bash
+c:\docker run -d -p 4400:80 -p 81:81 -p 2003:2003 -p 8125:8125/udp -p 8126:8126 --name grafana4 adonisv79/grafana4
+```
 
 
 ### Building the image yourself ###
