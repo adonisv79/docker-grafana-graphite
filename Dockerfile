@@ -46,7 +46,7 @@ RUN     git clone https://github.com/etsy/statsd.git /src/statsd                
 # Install Grafana
 RUN     mkdir /src/grafana                                                                                    &&\
         mkdir /opt/grafana                                                                                    &&\
-        wget https://grafanarel.s3.amazonaws.com/builds/grafana-4.0.2-1481203731.linux-x64.tar.gz -O /src/grafana.tar.gz &&\
+        wget https://grafanarel.s3.amazonaws.com/builds/grafana-4.2.0.linux-x64.tar.gz -O /src/grafana.tar.gz &&\
         tar -xzf /src/grafana.tar.gz -C /opt/grafana --strip-components=1                                     &&\
         rm /src/grafana.tar.gz
 
@@ -103,6 +103,13 @@ EXPOSE  8126
 # Graphite web port
 EXPOSE 81
 
+# ------------------------ #
+#   Share VOLUME to HOST   #
+# ------------------------ #
+
+#expose grafana data config (ui and dashboard changes) 
+#expose graphite storage (database)
+VOLUME /opt/grafana/data /opt/graphite/storage
 
 
 # -------- #
